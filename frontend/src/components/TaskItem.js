@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import '../styles/TaskItem.css';
-import { FaEdit, FaTrash, FaCheckCircle, FaClock, FaExclamationCircle } from 'react-icons/fa';
+import { FaEdit, FaTrash, FaClock, FaExclamationCircle } from 'react-icons/fa';
 
 const TaskItem = ({ task, onUpdate, onDelete, onComplete, isLoading }) => {
   const [isEditing, setIsEditing] = useState(false);
