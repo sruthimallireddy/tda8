@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+// Backend base URL (without /api)
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
 
 const apiClient = axios.create({
   baseURL: API_BASE_URL,
@@ -10,52 +11,17 @@ const apiClient = axios.create({
   }
 });
 
-// Task API calls
 const taskAPI = {
-  // Get all tasks with optional filters
-  getAllTasks: (params = {}) => {
-    return apiClient.get('/tasks', { params });
-  },
-
-  // Get a single task
-  getTaskById: (id) => {
-    return apiClient.get(`/tasks/${id}`);
-  },
-
-  // Create a new task
-  createTask: (taskData) => {
-    return apiClient.post('/tasks', taskData);
-  },
-
-  // Update a task
-  updateTask: (id, taskData) => {
-    return apiClient.put(`/tasks/${id}`, taskData);
-  },
-
-  // Mark task as complete
-  completeTask: (id) => {
-    return apiClient.patch(`/tasks/${id}/complete`);
-  },
-
-  // Delete a task
-  deleteTask: (id) => {
-    return apiClient.delete(`/tasks/${id}`);
-  },
-
-  // Get task statistics
-  getStatistics: () => {
-    return apiClient.get('/tasks/statistics/overview');
-  },
-
-  // Search tasks
-  searchTasks: (searchQuery) => {
-    return apiClient.get('/tasks', { params: { search: searchQuery } });
-  },
-
-  // Filter tasks
-  filterTasks: (filters) => {
-    return apiClient.get('/tasks', { params: filters });
-  }
+  // Axios automatically adds /api/tasks to the base URL
+  getAllTasks: (params = {}) => apiClient.get('/api/tasks', { params }),
+  getTaskById: (id) => apiClient.get(`/api/tasks/${id}`),
+  createTask: (taskData) => apiClient.post('/api/tasks', taskData),
+  updateTask: (id, taskData) => apiClient.put(`/api/tasks/${id}`, taskData),
+  completeTask: (id) => apiClient.patch(`/api/tasks/${id}/complete`),
+  deleteTask: (id) => apiClient.delete(`/api/tasks/${id}`),
+  getStatistics: () => apiClient.get('/api/tasks/statistics/overview'),
+  searchTasks: (searchQuery) => apiClient.get('/api/tasks', { params: { search: searchQuery } }),
+  filterTasks: (filters) => apiClient.get('/api/tasks', { params: filters }),
 };
 
 export default taskAPI;
