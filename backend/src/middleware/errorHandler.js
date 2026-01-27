@@ -1,7 +1,7 @@
 const errorHandler = (err, req, res, next) => {
   console.error(err);
 
-  // Mongoose validation error
+  //its a  Mongoose validation error
   if (err.name === 'ValidationError') {
     const messages = Object.values(err.errors).map(e => e.message);
     return res.status(400).json({
@@ -11,7 +11,7 @@ const errorHandler = (err, req, res, next) => {
     });
   }
 
-  // Mongoose duplicate key error
+  // it is a Mongoose duplicate key error
   if (err.code === 11000) {
     const field = Object.keys(err.keyValue)[0];
     return res.status(400).json({
@@ -20,7 +20,7 @@ const errorHandler = (err, req, res, next) => {
     });
   }
 
-  // Mongoose cast error
+  // its a Mongoose cast error
   if (err.name === 'CastError') {
     return res.status(400).json({
       success: false,
@@ -28,7 +28,7 @@ const errorHandler = (err, req, res, next) => {
     });
   }
 
-  // Default error
+  // it is Default error
   res.status(err.status || 500).json({
     success: false,
     message: err.message || 'Internal Server Error',

@@ -1,3 +1,5 @@
+// Database connection file created by me for this assignment.
+// I separated this logic into config to keep the code clean and reusable.
 const mongoose = require('mongoose');
 
 const connectDB = async () => {

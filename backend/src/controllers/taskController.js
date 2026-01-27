@@ -1,6 +1,6 @@
 const Task = require('../models/Task');
 
-// Create a new task
+// for creating a new task
 exports.createTask = async (req, res, next) => {
   try {
     const task = await Task.create(req.validatedBody);
@@ -14,13 +14,13 @@ exports.createTask = async (req, res, next) => {
   }
 };
 
-// Get all tasks with filtering and searching
+// for getting all tasks with filtering and searching
 exports.getAllTasks = async (req, res, next) => {
   try {
     const { status, priority, category, search, sortBy } = req.query;
     let query = {};
 
-    // Apply filters
+    // Applying filters
     if (status) {
       query.status = status;
     }
@@ -31,7 +31,7 @@ exports.getAllTasks = async (req, res, next) => {
       query.category = category;
     }
 
-    // Apply search
+    // Applying  search
     if (search) {
       query.$or = [
         { title: { $regex: search, $options: 'i' } },
@@ -40,7 +40,7 @@ exports.getAllTasks = async (req, res, next) => {
       ];
     }
 
-    let sortOptions = { createdAt: -1 }; // Default sort by creation date
+    let sortOptions = { createdAt: -1 }; // it is a sort by creation date
     if (sortBy === 'priority') {
       const priorityOrder = { 'high': 1, 'medium': 2, 'low': 3 };
       sortOptions = { priority: 1, createdAt: -1 };
@@ -61,7 +61,7 @@ exports.getAllTasks = async (req, res, next) => {
   }
 };
 
-// Get a single task by ID
+// forr getting a single task by ID
 exports.getTaskById = async (req, res, next) => {
   try {
     const task = await Task.findById(req.params.id);
@@ -83,7 +83,7 @@ exports.getTaskById = async (req, res, next) => {
   }
 };
 
-// Update a task
+//for  Updating a task
 exports.updateTask = async (req, res, next) => {
   try {
     const task = await Task.findById(req.params.id);
@@ -118,7 +118,7 @@ exports.updateTask = async (req, res, next) => {
   }
 };
 
-// Delete a task
+// Deleting a task
 exports.deleteTask = async (req, res, next) => {
   try {
     const task = await Task.findById(req.params.id);
@@ -142,7 +142,7 @@ exports.deleteTask = async (req, res, next) => {
   }
 };
 
-// Mark task as complete
+// Marking the task as complete
 exports.completeTask = async (req, res, next) => {
   try {
     const task = await Task.findByIdAndUpdate(
@@ -171,7 +171,7 @@ exports.completeTask = async (req, res, next) => {
   }
 };
 
-// Get task statistics
+// Getting task statistics
 exports.getStatistics = async (req, res, next) => {
   try {
     const total = await Task.countDocuments();
