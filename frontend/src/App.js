@@ -14,7 +14,7 @@ function App() {
   const [error, setError] = useState(null);
   const [currentFilters, setCurrentFilters] = useState({});
 
-  // Fetch all tasks
+  // Fetching all tasks
   const fetchTasks = async (filters = {}) => {
     setIsLoading(true);
     setError(null);
@@ -30,7 +30,7 @@ function App() {
     }
   };
 
-  // Fetch statistics
+  // Fetching thee statistics
   const fetchStatistics = async () => {
     try {
       const response = await taskAPI.getStatistics();
@@ -40,13 +40,13 @@ function App() {
     }
   };
 
-  // Initial load
+  // this is for Initial load
   useEffect(() => {
     fetchTasks();
     fetchStatistics();
   }, []);
 
-  // Handle creating a new task
+  // this is for  creating a new task
   const handleCreateTask = async (taskData) => {
     setIsLoading(true);
     setError(null);
@@ -64,7 +64,7 @@ function App() {
     }
   };
 
-  // Handle updating a task
+  // this is for a updating a task
   const handleUpdateTask = async (taskId, updatedData) => {
     setIsLoading(true);
     setError(null);
@@ -84,7 +84,7 @@ function App() {
     }
   };
 
-  // Handle deleting a task
+  // for deleting a task
   const handleDeleteTask = async (taskId) => {
     if (window.confirm('Are you sure you want to delete this task?')) {
       setIsLoading(true);
@@ -104,7 +104,7 @@ function App() {
     }
   };
 
-  // Handle completing a task
+  // for completing a task
   const handleCompleteTask = async (taskId) => {
     setIsLoading(true);
     setError(null);
@@ -123,13 +123,13 @@ function App() {
     }
   };
 
-  // Handle filtering tasks
+  // for a filtering tasks
   const handleFilter = async (filters) => {
     setCurrentFilters(filters);
     await fetchTasks(filters);
   };
 
-  // Handle searching tasks
+  // for searching tasks
   const handleSearch = async (searchQuery) => {
     if (!searchQuery.trim()) {
       await fetchTasks(currentFilters);
@@ -148,7 +148,7 @@ function App() {
     }
   };
 
-  // Handle reset filters
+  // for resetting filters
   const handleReset = async () => {
     setCurrentFilters({});
     await fetchTasks();
