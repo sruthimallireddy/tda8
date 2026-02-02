@@ -65,8 +65,12 @@ const TaskForm = ({ onTaskCreate, isLoading }) => {
     e.preventDefault();
     const newErrors = validateForm();
 
-    if (Object.keys(newErrors).length === 0) {
-      onTaskCreate(formData);
+    if (Object.keys(newErrors).length === 0)  {
+    const taskData = {
+      ...formData,
+      dueDate: formData.dueDate === '' ? null : formData.dueDate
+    };
+      onTaskCreate(taskData);
       setFormData({
         title: '',
         description: '',
